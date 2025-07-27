@@ -3,10 +3,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OctagonAlertIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 import Link from "next/link";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useRouter } from "next/navigation";
 
 const formSchema = z
   .object({
@@ -38,13 +40,15 @@ const formSchema = z
 export const SignUpView = () => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-  const [pending,setPending]=useState(false);
+  const [pending, setPending] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
@@ -52,10 +56,11 @@ export const SignUpView = () => {
     setError(null);
     setPending(true);
     authClient.signUp.email(
-      { 
-        name:data.name,
+      {
+        name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: "/",
       },
       {
         onSuccess: () => {
@@ -68,7 +73,24 @@ export const SignUpView = () => {
         },
       }
     );
-    
+  };
+
+  const onSocial = (provider: "github" | "google") => {
+    setError(null);
+    setPending(true);
+    authClient.signIn.social(
+      { provider: provider, callbackURL: "/" },
+      {
+        onSuccess: () => {
+          router.push("/");
+          setPending(false);
+        },
+        onError: ({ error }) => {
+          setError(error.message);
+          setPending(false);
+        },
+      }
+    );
   };
   return (
     <div className="flex flex-col gap-6">
@@ -174,11 +196,23 @@ export const SignUpView = () => {
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <Button variant="outline" type="button" className="w-full" disabled={pending}>
-                    Google
+                  <Button
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                    disabled={pending}
+                    onClick={() => onSocial("google")}
+                  >
+                    <FaGoogle/>
                   </Button>
-                  <Button variant="outline" type="button" className="w-full" disabled={pending}>
-                    Github
+                  <Button
+                    variant="outline"
+                    type="button"
+                    className="w-full"
+                    disabled={pending}
+                    onClick={() => onSocial("github")}
+                  >
+                    <FaGithub/>
                   </Button>
                 </div>
                 <div className="text-center text-sm">
