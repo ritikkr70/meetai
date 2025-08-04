@@ -2,12 +2,12 @@ import {
   AgentsView,
   AgentsViewError,
   AgentsViewLoading,
-} from "@/modules/agents/ui/agents-view";
+} from "@/modules/agents/ui/views/agents-view";
 import { getQueryClient, trpc } from "@/trpc/server";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
-import { AgentsListHeader } from "@/modules/agents/ui/agents-list-header";
+import { AgentsListHeader } from "@/modules/agents/ui/components/agents-list-header";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
