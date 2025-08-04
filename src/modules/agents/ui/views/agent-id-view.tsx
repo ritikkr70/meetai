@@ -55,7 +55,7 @@ export const AgentIdView = ({ agentId }: Props) => {
   const handleRemoveAgent = async () => {
     const ok = await confirmRemove();
     if (!ok) return;
-    removeAgent.mutateAsync({ id: agentId });
+    await removeAgent.mutateAsync({ id: agentId });
   };
 
   return (
