@@ -19,7 +19,7 @@ export const ResponsiveDialog=({title,description,children,open,onOpenChange}:Re
         <Drawer open={open} onOpenChange={onOpenChange}>
             <DrawerContent>
                 <DrawerHeader>
-                <DrawerTitle>{title}</DrawerTitle>
+                <DrawerTitle className="font-semibold">{title}</DrawerTitle>
                 <DrawerDescription>{description}</DrawerDescription>
                 </DrawerHeader>
                 <div className="p-4">{children}</div>
@@ -31,7 +31,7 @@ export const ResponsiveDialog=({title,description,children,open,onOpenChange}:Re
         <Dialog open={open} onOpenChange={onOpenChange}>
             <DialogContent>
                 <DialogHeader>
-                <DialogTitle>{title}</DialogTitle>
+                <DialogTitle className="font-semibold">{title}</DialogTitle>
                 <DrawerDescription>{description}</DrawerDescription>
                 </DialogHeader>
                 {children}
