@@ -119,7 +119,7 @@ export const MeetingForm = ({
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="e.g Match Consultations" />
+                  <Input {...field} placeholder="e.g Maths  Consultations" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
