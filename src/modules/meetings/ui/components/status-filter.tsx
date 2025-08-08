@@ -62,7 +62,7 @@ const options = [
   },
 ];
 
-export const StatusFIlter = () => {
+export const StatusFilter = () => {
   const [filters, setFilters] = useMeetingsFilters();
 
   return (

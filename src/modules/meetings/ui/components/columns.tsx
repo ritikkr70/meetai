@@ -16,7 +16,7 @@ import humanizeDuration from "humanize-duration";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
-function formatDuaration(seconds: number) {
+function formatDuration(seconds: number) {
   return humanizeDuration(seconds * 1000, {
     largest: 1,
     round: true,
@@ -98,7 +98,7 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
     header: "duration",
     cell: ({ row }) => <Badge variant="outline" className="capitalize [&>svg]:size-4 flex items-center gap-x-2 ">
         <ClockFadingIcon className="text-blue-700"/>
-        {row.original.duration ? formatDuaration(row.original.duration) : "No Duration"}
+        {row.original.duration ? formatDuration(row.original.duration) : "No Duration"}
     </Badge>,
   },
 ];
