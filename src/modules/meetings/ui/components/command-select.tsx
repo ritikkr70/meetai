@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { CommandEmpty, CommandInput, CommandItem, CommandList, CommandResponsiveDialog } from "@/components/ui/command";
+import {
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandResponsiveDialog,
+} from "@/components/ui/command";
 import { cn } from "@/lib/utils";
 import { ChevronsUpDownIcon } from "lucide-react";
 import { ReactNode, useState } from "react";
@@ -23,15 +29,20 @@ export const CommandSelect = ({
   onSelect,
   onSearch,
   value,
-  placeholder ="Select an option",
+  placeholder = "Select an option",
   className,
 }: Props) => {
   const [open, setOpen] = useState(false);
   const selectedOption = options.find((option) => option.value === value);
+  const handleOpenChange = (open: boolean) => {
+    onSearch?.("");
+    setOpen(open);
+  };
+
   return (
     <>
       <Button
-      onClick={() => setOpen(true)}
+        onClick={() => setOpen(true)}
         type="button"
         variant="outline"
         className={cn(
@@ -43,19 +54,30 @@ export const CommandSelect = ({
         <div>{selectedOption?.children ?? placeholder}</div>
         <ChevronsUpDownIcon />
       </Button>
-      <CommandResponsiveDialog shouldFilter={!onSearch} open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search..." onValueChange={onSearch}/>
+      <CommandResponsiveDialog
+        shouldFilter={!onSearch}
+        open={open}
+        onOpenChange={handleOpenChange}
+      >
+        <CommandInput placeholder="Search..." onValueChange={onSearch} />
         <CommandList>
-            <CommandEmpty>
-                <span className="text-muted-foreground text-sm">No options found</span>
-            </CommandEmpty>
-            {options.map((option) =>(
-                <CommandItem key={option.id} onSelect={()=>{onSelect(option.value); setOpen(false);}}>
-                    {option.children}
-                </CommandItem>
-            ))}
+          <CommandEmpty>
+            <span className="text-muted-foreground text-sm">
+              No options found
+            </span>
+          </CommandEmpty>
+          {options.map((option) => (
+            <CommandItem
+              key={option.id}
+              onSelect={() => {
+                onSelect(option.value);
+                setOpen(false);
+              }}
+            >
+              {option.children}
+            </CommandItem>
+          ))}
         </CommandList>
-
       </CommandResponsiveDialog>
     </>
   );
