@@ -4,7 +4,7 @@ import { PlusIcon, XCircleIcon } from "lucide-react";
 import { NewMeetingDialog } from "./new-meeting-dialog";
 import { useState } from "react";
 import { MeetingsSearchFilters } from "./meetings-search-filter";
-import { StatusFIlter } from "./status-filter";
+import { StatusFilter} from "./status-filter";
 import { AgentIdFilter } from "./agent-id-filter";
 import { useMeetingsFilters } from "../../hooks/use-meetings-filters";
 
@@ -36,7 +36,7 @@ export const MeetingsListHeader = () => {
         </div>
         <div className="flex items-center gap-x-2 p-1">
           <MeetingsSearchFilters />
-          <StatusFIlter />
+          <StatusFilter />
           <AgentIdFilter />
           {isAnyFilterModified && (
             <Button variant="ghost" onClick={onClearFilters}>
