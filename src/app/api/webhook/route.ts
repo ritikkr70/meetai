@@ -13,7 +13,7 @@ import { db } from "../../../../db";
 import { agents, meetings } from "../../../../db/schema";
 import { and, eq, not } from "drizzle-orm";
 import { inngest } from "@/inngest/client";
-import { OpenAI } from "openai";
+import OpenAI from "openai";
 import { streamChat } from "@/lib/stream-chat";
 import { generateAvatarUri } from "@/lib/avatar";
 
@@ -207,7 +207,7 @@ export async function POST(req: NextRequest) {
 
       const previousMessages = channel.state.messages
         .slice(-5)
-        .filter((msg) => msg.text?.trim() !== "")
+        .filter((msg) =>msg.text && msg.text?.trim() !== "")
         .map<ChatCompletionMessageParam>((message) => ({
           role: message.user?.id === existingAgent.id ? "assistant" : "user",
           content: message.text || "",
