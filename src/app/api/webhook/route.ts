@@ -158,6 +158,7 @@ export async function POST(req: NextRequest) {
     const event = payload as MessageNewEvent;
     const userId = event.user?.id;
     const channelId = event.channel_id;
+    console.log(userId)
     const text = event.message?.text;
     if (!userId || !channelId || !text) {
       return NextResponse.json(
