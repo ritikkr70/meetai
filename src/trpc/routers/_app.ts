@@ -7,7 +7,7 @@ import { premiumRouter } from "@/modules/premium/server/procedures";
 export const appRouter = createTRPCRouter({
   agents: agentsRouter,
   meetings: meetingsRouter,
-  premium:premiumRouter
+  premium: premiumRouter,
 });
 
 export type AppRouter = typeof appRouter;
