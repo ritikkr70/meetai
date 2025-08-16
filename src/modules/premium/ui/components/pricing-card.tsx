@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import {  CircleCheckIcon } from "lucide-react";
+import { CircleCheckIcon } from "lucide-react";
 
 const pricingCardVariants = cva("rounded-lg p-4 py-6 w-full", {
   variants: {
@@ -29,7 +29,7 @@ const pricingCardIconVariants = cva("size-5", {
   },
 });
 
-const pricingCardSecondaryTextVairants = cva("text-neutral-700", {
+const pricingCardSecondaryTextVariants = cva("text-neutral-700", {
   variants: {
     variant: {
       default: "text-neutral-700",
@@ -88,7 +88,7 @@ export const PricingCard = ({
           </div>
           <p
             className={cn(
-              pricingCardSecondaryTextVairants({ variant }),
+              pricingCardSecondaryTextVariants({ variant }),
               "text-xs"
             )}
           >
@@ -103,7 +103,7 @@ export const PricingCard = ({
               minimumFractionDigits: 0,
             }).format(price)}
           </h4>
-          <span className={cn(pricingCardSecondaryTextVairants)}>
+          <span className={cn(pricingCardSecondaryTextVariants({ variant }))}>
             {priceSuffix}
           </span>
         </div>
@@ -124,7 +124,7 @@ export const PricingCard = ({
         <ul
           className={cn(
             "flex flex-col gap-y-2.5",
-            pricingCardSecondaryTextVairants({ variant })
+            pricingCardSecondaryTextVariants({ variant })
           )}
         >
           {features?.map((feature, index) => (
